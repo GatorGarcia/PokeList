@@ -1,16 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { PokemonResult } from '../types/PokemonResult';
-import { capitalizeFirstLetter } from '../helpers/stringFormatting';
 
 export const PokeInfo = (props: PokeInfoProps) => {
     const { height, weight, type } = props;
 
     return (
         <View style={styles.info}>
-            <Text>Type: {type}</Text>
-            <Text>Height: {height}</Text>
-            <Text>Weight: {weight}</Text>
+            <Text testID={'type'}>Type: {type}</Text>
+            <Text testID={'height'}>Height: {height}</Text>
+            <Text testID={'weight'}>Weight: {weight}</Text>
         </View>
     )
 }

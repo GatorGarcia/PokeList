@@ -23,7 +23,7 @@ export const PokemonScreen = (props: PokemonScreenProps) => {
                 style={styles.list}
                 data={displayedPokemon}
                 renderItem={({ item }) => <PokeCard pokemon={item} />}
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={(item, index) => `${item.id}-${index}`}
                 onEndReachedThreshold={0.5}
                 onEndReached={loadMorePokemon}
                 ListFooterComponent={<ActivityIndicator size={'large'} />}

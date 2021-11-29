@@ -18,10 +18,10 @@ export const PokeCard = (props: PokeCardProps) => {
     const type = capitalizeFirstLetter(types[0].type.name)
 
     return (
-        <Pressable style={styles.cardContainer} onPress={() => navigation.navigate('Pokemon Details', {name: name, img: img})}>
+        <Pressable testID={'pressableWrapper'} style={styles.cardContainer} onPress={() => navigation.navigate('Pokemon Details', {name: name, img: img})}>
             <View style={styles.card}>
                 <Text style={styles.id}>{id}</Text>
-                <Image source={{ uri: img }} style={styles.image} />
+                <Image testID={'pokemonImg'} source={{ uri: img }} style={styles.image} />
                 <Text style={styles.name}>{name}</Text>
                 <PokeInfo {...pokemon} type={type} />
                 <ActionButton {...pokemon} move={move} type={type}/>
