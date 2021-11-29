@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import { PokemonResult } from '../types/PokemonResult';
-import { PokeCard } from './PokeCard';
+import { PokeCard } from '../components/PokeCard';
 import { getPokemon } from '../helpers/getPokemon';
 import { TYPE_COLORS } from '../constants';
 
-export const PokeList = (props: PokeListProps) => {
-    const { pokemonArray } = props;
+export const PokemonScreen = ({ navigation, route }) => {
+    const { pokemonArray } = route.params;
 
     const [displayedPokemon, setDisplayedPokemon] = useState(pokemonArray);
 

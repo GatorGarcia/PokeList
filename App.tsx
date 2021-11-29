@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { LoadingIndicator } from './src/components/LoadingIndicator';
-import { PokeList } from './src/components/PokeList';
+import { PokemonScreen } from './src/screens/PokemonScreen';
 import { getPokemon } from './src/helpers/getPokemon';
 import { PokemonResult } from './src/types/PokemonResult';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
 
 export default function App() {
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -18,5 +23,16 @@ export default function App() {
     callPokemonApi();
   }, [])
 
-  return loaded ? <PokeList pokemonArray={pokemonArray}/> : <LoadingIndicator />;
+  if (!loaded) return <LoadingIndicator />;
+  else return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="Pokemon List"
+          component={PokemonScreen}
+          initialParams={{ pokemonArray: pokemonArray }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
