@@ -4,8 +4,11 @@ import { PokemonResult } from '../types/PokemonResult';
 import { capitalizeFirstLetter } from '../helpers/stringFormatting';
 import { ActionButton } from './ActionButton';
 import { PokeInfo } from './PokeInfo';
+import { useNavigation } from '@react-navigation/core';
 
 export const PokeCard = (props: PokeCardProps) => {
+    const navigation = useNavigation();
+
     const { pokemon } = props;
     const { id, types } = pokemon;
     const name = capitalizeFirstLetter(pokemon.name);
@@ -15,7 +18,7 @@ export const PokeCard = (props: PokeCardProps) => {
     const type = capitalizeFirstLetter(types[0].type.name)
 
     return (
-        <Pressable style={styles.cardContainer} onPress={() => console.log('pressed')}>
+        <Pressable style={styles.cardContainer} onPress={() => navigation.navigate('Pokemon Details', {name: name, img: img})}>
             <View style={styles.card}>
                 <Text style={styles.id}>{id}</Text>
                 <Image source={{ uri: img }} style={styles.image} />

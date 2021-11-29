@@ -3,10 +3,9 @@ import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import { PokemonResult } from '../types/PokemonResult';
 import { PokeCard } from '../components/PokeCard';
 import { getPokemon } from '../helpers/getPokemon';
-import { TYPE_COLORS } from '../constants';
 
-export const PokemonScreen = ({ navigation, route }) => {
-    const { pokemonArray } = route.params;
+export const PokemonScreen = (props: PokemonScreenProps) => {
+    const { pokemonArray } = props.route.params;
 
     const [displayedPokemon, setDisplayedPokemon] = useState(pokemonArray);
 
@@ -33,8 +32,12 @@ export const PokemonScreen = ({ navigation, route }) => {
     )
 }
 
-type PokeListProps = {
-    pokemonArray: PokemonResult[]
+type PokemonScreenProps = {
+    route: {
+        params: {
+            pokemonArray: PokemonResult[]
+        }
+    }
 }
 
 const styles = StyleSheet.create({

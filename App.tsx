@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { LoadingIndicator } from './src/components/LoadingIndicator';
 import { PokemonScreen } from './src/screens/PokemonScreen';
+import { PokemonDetailsScreen } from './src/screens/PokemonDetailsScreen';
 import { getPokemon } from './src/helpers/getPokemon';
 import { PokemonResult } from './src/types/PokemonResult';
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,11 +27,15 @@ export default function App() {
   if (!loaded) return <LoadingIndicator />;
   else return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator>
         <Stack.Screen
           name="Pokemon List"
           component={PokemonScreen}
           initialParams={{ pokemonArray: pokemonArray }}
+        />
+        <Stack.Screen
+          name="Pokemon Details"
+          component={PokemonDetailsScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>
