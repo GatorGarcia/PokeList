@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, Pressable, Alert } from 'react-native';
-import { PokemonType } from '../types/PokemonResult';
 import { TYPE_COLORS } from '../constants';
 
 export const ActionButton = (props: PokeButtonProps) => {

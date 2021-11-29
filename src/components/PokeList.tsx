@@ -1,18 +1,33 @@
-import React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, FlatList, ActivityIndicator } from 'react-native';
 import { PokemonResult } from '../types/PokemonResult';
 import { PokeCard } from './PokeCard';
+import { getPokemon } from '../helpers/getPokemon';
+import { TYPE_COLORS } from '../constants';
 
 export const PokeList = (props: PokeListProps) => {
     const { pokemonArray } = props;
+
+    const [displayedPokemon, setDisplayedPokemon] = useState(pokemonArray);
+
+    const loadMorePokemon = async () => {
+        const nextPokemonIndex = displayedPokemon.length + 1;
+        const finalPokemonIndex = nextPokemonIndex + 20;
+        const newPokemon: PokemonResult[] = await getPokemon(nextPokemonIndex, finalPokemonIndex);
+        const newDisplayedPokemon = displayedPokemon.concat(newPokemon);
+        setDisplayedPokemon(newDisplayedPokemon);
+    }
 
     return (
         <View style={styles.container}>
             <FlatList
                 style={styles.list}
-                data={pokemonArray}
+                data={displayedPokemon}
                 renderItem={({ item }) => <PokeCard pokemon={item} />}
                 keyExtractor={item => item.id.toString()}
+                onEndReachedThreshold={0.5}
+                onEndReached={loadMorePokemon}
+                ListFooterComponent={<ActivityIndicator size={'large'} />}
             />
         </View>
     )
