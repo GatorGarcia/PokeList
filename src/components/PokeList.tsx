@@ -1,15 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import { PokemonResult } from '../types/PokemonResult';
+import { PokeCard } from './PokeCard';
 
 export const PokeList = (props: PokeListProps) => {
     const { pokemonArray } = props;
 
     return (
         <View style={styles.container}>
-            { pokemonArray.map(pokemon => {
-                return <Text key={`${pokemon.name}Text`}>{pokemon.name}</Text>
-            }) }
+            <FlatList
+                style={styles.list}
+                data={pokemonArray}
+                renderItem={({ item }) => <PokeCard pokemon={item} />}
+                keyExtractor={item => item.id.toString()}
+            />
         </View>
     )
 }
@@ -21,8 +25,12 @@ type PokeListProps = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 50,
+        marginBottom: 50,
+    },
+    list: {
+        width: '100%',
     },
 });

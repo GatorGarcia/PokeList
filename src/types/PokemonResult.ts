@@ -1,20 +1,29 @@
 export type PokemonResult = {
     name: string,
-    sprites: {
-        front_default: string
-    },
-    moves: {
-        0: {
-            move: {
-                name: string
-            }
-        }
-    },
-    types: {
-        0: {
-            type: {
-                name: string
-            }
+    sprites: PokemonSprite,
+    moves: PokemonMove,
+    types: PokemonType,
+    height: string,
+    weight: string,
+    id: string
+}
+
+export type PokemonType = {
+    0: {
+        type: {
+            name: string
         }
     }
+}
+
+type PokemonMove = {
+    0: {
+        move: {
+            name: string
+        }
+    }
+}
+
+type PokemonSprite = {
+    front_default: string
 }
